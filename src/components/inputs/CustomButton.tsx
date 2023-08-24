@@ -6,7 +6,7 @@ type Props = {
 
 function CustomButton({ title }: Props) {
   return (
-    <button className="text-stone-50 font-bold bg-blue-600 rounded-md w-max">
+    <button className="text-stone-50 font-bold bg-blue-600 rounded-md w-max h-12 px-6">
       {title}
     </button>
   );
