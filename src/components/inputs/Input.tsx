@@ -20,7 +20,7 @@ function Input({ name, Change, subtitle, icon: Icon, PlusSize }: Props) {
         onChange={(e) => Change(e.target.value)}
         className={`w-full ${
           PlusSize ? "h-36" : "h-full"
-        } rounded-lg text-black `}
+        } rounded-md text-black `}
         type="text"
         id="name"
         name="name"
