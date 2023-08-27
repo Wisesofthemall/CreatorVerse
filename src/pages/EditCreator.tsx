@@ -131,7 +131,6 @@ function EditCreator() {
           subtitle="The Name of the Creator"
           icon={AiOutlineUser}
           value={user?.name}
-          dark
         />
       </div>
       <div className="w-60 m-7">
@@ -141,11 +140,10 @@ function EditCreator() {
           subtitle="An image of the Creator (optional)"
           icon={BsFillImageFill}
           value={user?.url}
-          dark
         />
       </div>
       <div className="w-60 m-7 ">
-        <Description Change={setDesc} value={user?.description} dark />
+        <Description Change={setDesc} value={user?.description} />
       </div>
       <SocialMedias
         setState={setSocials}
@@ -155,7 +153,6 @@ function EditCreator() {
           instagram: (user as socialType)?.instagram,
           twitter: (user as socialType)?.twitter,
         }}
-        dark
       />
       <div className="flex justify-between my-8">
         <div onClick={() => HandleC()} className="">
