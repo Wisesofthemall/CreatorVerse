@@ -36,7 +36,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-👉🏿<img src='addCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+👉🏿<img src='/public/addCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 👉🏿<img src='/public/showCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 👉🏿<img src='/public/editCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 👉🏿<img src='/public/deleteCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
