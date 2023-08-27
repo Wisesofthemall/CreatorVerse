@@ -99,4 +99,13 @@ export async function editCreatorById(
   return "success";
 }
 
-// Usage
+export async function deleteCreatorById(id: number) {
+  const { error } = await supabase.from("creators").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    return error;
+  }
+
+  return "success";
+}

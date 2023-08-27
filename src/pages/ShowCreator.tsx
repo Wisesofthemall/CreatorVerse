@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { getCreatorById } from "../client";
+import { deleteCreatorById, getCreatorById } from "../client";
 import { IconType } from "react-icons";
 import { BsTwitter } from "react-icons/bs";
 import { GrInstagram } from "react-icons/gr";
 import { ImYoutube } from "react-icons/im";
 import CustomButton from "../components/inputs/CustomButton";
+import CustomIcon from "../components/inputs/CustomIcon";
 
 type creatorType = {
   created_at: string;
@@ -56,6 +57,19 @@ export default function ShowCreator() {
     socials.push({ icon: ImYoutube, handle: "youtube", name: user.youtube });
   }
 
+  const handleDelete = async () => {
+    const pass = prompt('type "Delete" to delete');
+    if (pass === "Delete") {
+      if (id) {
+        window.location.href = `/`;
+        deleteCreatorById(parseInt(id));
+      }
+    } else {
+      alert("Canceled");
+      return;
+    }
+  };
+
   console.log(socials);
   useEffect(() => {
     async function fetchData() {
@@ -87,10 +101,10 @@ export default function ShowCreator() {
               {user?.description}
             </div>
             <div className="">
-              {socials.map(({ handle, name, icon: Icon }) => {
+              {socials.map(({ handle, name, icon }) => {
                 return (
                   <div key={handle} className="flex text-blue-400 m-5">
-                    <Icon size={40} />
+                    <CustomIcon icon={icon} handle={handle} link={name} />
                     <div className="text-4xl font-bold ml-4">@{name}</div>
                   </div>
                 );
@@ -102,7 +116,9 @@ export default function ShowCreator() {
             <div onClick={() => handleEdit()} className="cursor-pointer ">
               <CustomButton title="EDIT" />
             </div>
-            <CustomButton title="DELETE" />
+            <div onClick={() => handleDelete()} className="">
+              <CustomButton title="DELETE" />
+            </div>
           </div>
         </div>
       </div>
