@@ -93,6 +93,9 @@ function EditCreator() {
       window.location.href = `/`;
     }
   };
+  const HandleCancel = () => {
+    window.location.href = `/`;
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -120,6 +123,7 @@ function EditCreator() {
 
   return (
     <div className="text-stone-50 grid justify-center w-full h-full">
+      <div className="text-xl text-black">EDIT CREATOR</div>
       <div className="w-60 m-7">
         <Input
           name="Name"
@@ -157,7 +161,9 @@ function EditCreator() {
         <div onClick={() => HandleC()} className="">
           <CustomButton title="Submit" />
         </div>
-        <CustomButton title="Cancel " />
+        <div className="" onClick={() => HandleCancel()}>
+          <CustomButton title="Cancel " />
+        </div>
       </div>
     </div>
   );

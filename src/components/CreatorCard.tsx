@@ -72,7 +72,10 @@ function CreatorCard({
           >
             <FaCircleInfo size={20} />
           </div>
-          <div className="mx-1">
+          <div
+            onClick={() => navigate(`/EditCreator/?id=${id}`)}
+            className="mx-1 cursor-pointer"
+          >
             <BiSolidPencil size={20} />
           </div>
         </div>
