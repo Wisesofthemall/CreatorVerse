@@ -68,3 +68,35 @@ export async function getCreatorById(id: number): Promise<creatorType | null> {
   console.log(data);
   return data;
 }
+export async function editCreatorById(
+  id: number,
+  name: string,
+  url: string,
+  description: string,
+  youtube: string,
+  instagram: string,
+  twitter: string,
+) {
+  const updateData = {
+    name,
+    url,
+    description,
+    youtube,
+    instagram,
+    twitter,
+  };
+
+  const { error } = await supabase
+    .from("creators")
+    .update(updateData)
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    return error;
+  }
+
+  return "success";
+}
+
+// Usage

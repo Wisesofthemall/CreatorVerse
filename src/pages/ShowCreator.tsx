@@ -29,7 +29,8 @@ export default function ShowCreator() {
   //const navigate = useNavigate();
 
   const handleEdit = () => {
-    window.location.href = "/EditCreator/?id=9";
+    console.log((user as creatorType).id);
+    window.location.href = `/EditCreator/?id=${(user as creatorType).id}`;
   };
 
   console.log(location.search); // "?query=foo"
@@ -72,34 +73,38 @@ export default function ShowCreator() {
   }, [id]);
 
   return (
-    <div className="text-stone-50 h-[50rem] w-full border border-1 border-black px-10 pt-5">
-      <div className=" h-3/4  md:flex">
-        <div className=" flex-1 ">
-          <img className="w-full h-full rounded-lg" src={user?.url} />
-        </div>
-        <div className=" flex-1 p-6">
-          <div className="font-bold text-4xl text-blue-400 ">{user?.name}</div>
-          <div className="font-bold text-md my-5 text-blue-400">
-            {user?.description}
+    <div className="">
+      <div className="text-stone-50 h-[51rem] w-full  px-10 pt-5">
+        <div className=" h-3/4  md:flex ">
+          <div className=" flex-1 ">
+            <img className="w-full h-full  rounded-lg" src={user?.url} />
           </div>
-          <div className="">
-            {socials.map(({ handle, name, icon: Icon }) => {
-              return (
-                <div key={handle} className="flex text-blue-400 m-5">
-                  <Icon size={40} />
-                  <div className="text-4xl font-bold ml-4">@{name}</div>
-                </div>
-              );
-            })}
+          <div className=" flex-1 p-6">
+            <div className="font-bold text-4xl text-blue-400 ">
+              {user?.name}
+            </div>
+            <div className="font-bold text-md my-5 text-blue-400">
+              {user?.description}
+            </div>
+            <div className="">
+              {socials.map(({ handle, name, icon: Icon }) => {
+                return (
+                  <div key={handle} className="flex text-blue-400 m-5">
+                    <Icon size={40} />
+                    <div className="text-4xl font-bold ml-4">@{name}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="my-8 text-green-500 flex justify-around ">
+            {" "}
+            <div onClick={() => handleEdit()} className="cursor-pointer ">
+              <CustomButton title="EDIT" />
+            </div>
+            <CustomButton title="DELETE" />
           </div>
         </div>
-      </div>
-      <div className="my-8 text-green-500 flex justify-around ">
-        {" "}
-        <div onClick={() => handleEdit()} className="cursor-pointer ">
-          <CustomButton title="EDIT" />
-        </div>
-        <CustomButton title="DELETE" />
       </div>
     </div>
   );

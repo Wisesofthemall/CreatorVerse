@@ -4,7 +4,7 @@ import { AiOutlineUser } from "react-icons/ai";
 
 import { BsFillImageFill } from "react-icons/bs";
 import { toast } from "react-hot-toast";
-import { getCreatorById, postCreator } from "../client";
+import { editCreatorById, getCreatorById } from "../client";
 import Input from "../components/inputs/Input";
 import Description from "../components/Description";
 import SocialMedias from "../components/SocialMedias";
@@ -15,14 +15,13 @@ type socialType = {
   twitter?: string;
   instagram?: string;
 };
-type infoType = {
-  name: string;
-  desc: string;
-  image?: string;
-  youtube?: string;
-  twitter?: string;
-  instagram?: string;
+
+type strictSocialType = {
+  youtube: string;
+  twitter: string;
+  instagram: string;
 };
+
 type creatorType = {
   created_at: string;
   id: number;
@@ -36,7 +35,7 @@ type creatorType = {
 
 function EditCreator() {
   const [name, setName] = useState<string>("");
-  const [desc, setdDesc] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
   const [socials, setSocials] = useState({});
   const [image, setImage] = useState<string>("");
   const [user, setUser] = useState<creatorType>();
@@ -46,7 +45,6 @@ function EditCreator() {
   const id: string | null = query.get("id");
 
   const HandleC = async () => {
-    const info: infoType = { name, image, desc, ...socials };
     function verifySocial(obj: socialType): boolean {
       if (obj.instagram && obj.instagram.length > 0) {
         return false;
@@ -72,23 +70,27 @@ function EditCreator() {
       toast.error("Please add atleast one social media handle");
       return;
     }
-    //  name: string,
-    // url: string,
-    // desc: string,
-    // youtube: string,
-    // instagram: string,
-    // twitter: string,
-    const posted = await postCreator(
+    console.log(
       name,
       image,
       desc,
-      info.youtube || "",
-      info.instagram || "",
-      info.twitter || "",
+      (socials as strictSocialType).youtube,
+      (socials as strictSocialType).instagram,
+      (socials as strictSocialType).twitter,
     );
-    console.log(posted);
-    if (posted === "success") {
-      toast.success(posted);
+    const edit = await editCreatorById(
+      (user as creatorType).id,
+      name,
+      image,
+      desc,
+      (socials as strictSocialType).youtube,
+      (socials as strictSocialType).instagram,
+      (socials as strictSocialType).twitter,
+    );
+    console.log(edit);
+    if (edit === "success") {
+      toast.success(edit);
+      window.location.href = `/`;
     }
   };
 
@@ -101,6 +103,14 @@ function EditCreator() {
         if (data) {
           console.log(data);
           setUser(data);
+          setName(data.name);
+          setDesc(data.description);
+          setImage(data.url);
+          setSocials({
+            twitter: data.twitter,
+            instagram: data.instagram,
+            youtube: data.youtube,
+          });
         }
       }
     }
@@ -110,7 +120,6 @@ function EditCreator() {
 
   return (
     <div className="text-stone-50 grid justify-center w-full h-full">
-      <div className="bg-explosion bg-cover bg-right bg-no-repeat w-full h-[120%] absolute mix-blend-color-dodge translate-z-0 "></div>
       <div className="w-60 m-7">
         <Input
           name="Name"
@@ -118,6 +127,7 @@ function EditCreator() {
           subtitle="The Name of the Creator"
           icon={AiOutlineUser}
           value={user?.name}
+          dark
         />
       </div>
       <div className="w-60 m-7">
@@ -127,10 +137,11 @@ function EditCreator() {
           subtitle="An image of the Creator (optional)"
           icon={BsFillImageFill}
           value={user?.url}
+          dark
         />
       </div>
       <div className="w-60 m-7 ">
-        <Description Change={setdDesc} value={user?.description} />
+        <Description Change={setDesc} value={user?.description} dark />
       </div>
       <SocialMedias
         setState={setSocials}
@@ -140,6 +151,7 @@ function EditCreator() {
           instagram: (user as socialType)?.instagram,
           twitter: (user as socialType)?.twitter,
         }}
+        dark
       />
       <div className="flex justify-between my-8">
         <div onClick={() => HandleC()} className="">

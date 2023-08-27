@@ -13,17 +13,19 @@ type Prop = {
   setState: (value: SocialProp) => void;
   state: SocialProp;
   value?: SocialProp;
+  dark?: boolean;
 };
-function SocialMedias({ setState, state, value }: Prop) {
+function SocialMedias({ setState, state, value, dark }: Prop) {
   return (
-    <div>
-      <div className="w-60 m-7">
+    <div className={`w-60 m-7 ${dark ? "text-black" : ""}`}>
+      <div className={`w-60 m-7 ${dark ? "text-black" : ""}`}>
         <Input
           name="Youtube"
           Change={(value) => setState({ ...state, youtube: value })}
           subtitle="The handle without the @"
           icon={BiLogoYoutube}
           value={value ? value.youtube : undefined}
+          dark={dark ? true : false}
         />{" "}
       </div>
       <div className="w-60 m-7">
@@ -33,6 +35,7 @@ function SocialMedias({ setState, state, value }: Prop) {
           subtitle="The handle without the @"
           icon={BsTwitter}
           value={value ? value.twitter : undefined}
+          dark={dark ? true : false}
         />
       </div>
       <div className="w-60 m-7">
@@ -42,6 +45,7 @@ function SocialMedias({ setState, state, value }: Prop) {
           subtitle="The handle without the @"
           icon={BsInstagram}
           value={value ? value.instagram : undefined}
+          dark={dark ? true : false}
         />
       </div>
     </div>
