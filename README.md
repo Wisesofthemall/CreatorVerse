@@ -35,10 +35,13 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
-
+  Add Creator
 👉🏿<img src='/public/addCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+ Detail Page
 👉🏿<img src='/public/showCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Edit Creator
 👉🏿<img src='/public/editCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+Delete Creator
 👉🏿<img src='/public/deleteCreator.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 <!-- Replace this with whatever GIF tool you used! -->
@@ -56,7 +59,7 @@ In light of my first encounter with Vite.js and Supabase within my project, I en
 
 ## License
 
-Copyright [👉🏿 yyyy] [👉🏿 name of copyright owner]
+Copyright [👉🏿 2023] [👉🏿 lovinson dieujuste]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
