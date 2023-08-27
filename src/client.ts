@@ -52,3 +52,19 @@ export async function postCreator(
 
   return "success";
 }
+
+export async function getCreatorById(id: number): Promise<creatorType | null> {
+  const { data, error } = await supabase
+    .from("creators")
+    .select()
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.log(error);
+    return null;
+  }
+
+  console.log(data);
+  return data;
+}
