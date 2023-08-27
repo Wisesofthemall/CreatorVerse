@@ -1,3 +1,98 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getCreatorById } from "../client";
+import { IconType } from "react-icons";
+import { BsTwitter } from "react-icons/bs";
+import { GrInstagram } from "react-icons/gr";
+import { ImYoutube } from "react-icons/im";
+import CustomButton from "../components/inputs/CustomButton";
+
+type creatorType = {
+  created_at: string;
+  id: number;
+  name: string;
+  url: string;
+  description: string;
+  twitter?: string | null;
+  instagram?: string | null;
+  youtube?: string | null;
+};
+
+type socialType = {
+  icon: IconType;
+  handle: string;
+  name: string;
+};
 export default function ShowCreator() {
-  return <div className="text-stone-50">showCreator</div>;
+  const [user, setUser] = useState<creatorType | null>(null);
+  const location = useLocation();
+
+  console.log(location.search); // "?query=foo"
+
+  const query = new URLSearchParams(location.search);
+  const id: string | null = query.get("id");
+  const socials: socialType[] = [];
+
+  if (user?.twitter && (user?.twitter?.length > 0 || user?.twitter !== null)) {
+    socials.push({ icon: BsTwitter, handle: "twitter", name: user.twitter });
+  }
+  if (
+    user?.instagram &&
+    (user?.instagram?.length > 0 || user?.instagram !== null)
+  ) {
+    socials.push({
+      icon: GrInstagram,
+      handle: "instagram",
+      name: user.instagram,
+    });
+  }
+  if (user?.youtube && (user?.youtube?.length > 0 || user?.youtube !== null)) {
+    socials.push({ icon: ImYoutube, handle: "youtube", name: user.youtube });
+  }
+  console.log(socials);
+  useEffect(() => {
+    async function fetchData() {
+      if (id) {
+        console.log(parseInt(id));
+        const data = await getCreatorById(parseInt(id));
+        console.log(data);
+        if (data) {
+          setUser(data);
+        }
+      }
+    }
+
+    fetchData();
+  }, [id]);
+
+  return (
+    <div className="text-stone-50 h-[50rem] w-full border border-1 border-black px-10 pt-5">
+      <div className=" h-3/4 border border-1 border-purple-600 md:flex">
+        <div className="border border-1 border-orange-600 flex-1 ">
+          <img className="w-full h-full" src={user?.url} />
+        </div>
+        <div className="border border-1 border-x-amber-950 flex-1 p-6">
+          <div className="font-bold text-4xl text-blue-700 ">{user?.name}</div>
+          <div className="font-bold text-md my-5 text-blue-700 ">
+            {user?.description}
+          </div>
+          <div className="">
+            {socials.map(({ handle, name, icon: Icon }) => {
+              return (
+                <div key={handle} className="flex text-blue-700 m-5">
+                  <Icon size={40} />
+                  <div className="text-4xl font-bold ml-4">@{name}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="border border-1 text-green-500 flex">
+        {" "}
+        <CustomButton title="EDIT" />
+        <CustomButton title="DELETE" />
+      </div>
+    </div>
+  );
 }
