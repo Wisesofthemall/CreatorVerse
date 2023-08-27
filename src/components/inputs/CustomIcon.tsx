@@ -1,5 +1,4 @@
 import { IconType } from "react-icons";
-import { useNavigate } from "react-router-dom";
 type Props = {
   icon: IconType;
   link?: string;

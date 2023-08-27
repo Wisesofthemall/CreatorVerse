@@ -7,6 +7,7 @@ function App() {
   const [toggleView, setToggleView] = useState(false);
 
   const handleToggle = (clicked: string) => {
+    console.log("Boom");
     if (clicked === "view") {
       setToggleView(true);
     } else {
@@ -29,7 +30,13 @@ function App() {
           <CustomButton title="Add a Creator" />
         </div>
       </div>
-      <div className="">{toggleView ? <ViewCreators /> : <AddCreator />}</div>
+      <div className="">
+        {toggleView ? (
+          <ViewCreators />
+        ) : (
+          <AddCreator handleToggle={handleToggle} />
+        )}
+      </div>
     </div>
   );
 }

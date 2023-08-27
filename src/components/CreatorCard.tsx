@@ -1,6 +1,8 @@
 import { BsTwitter } from "react-icons/bs";
 import { GrInstagram } from "react-icons/gr";
 import { ImYoutube } from "react-icons/im";
+import { FaCircleInfo } from "react-icons/fa6";
+import { BiSolidPencil } from "react-icons/bi";
 //import CustomIcon from "./inputs/CustomIcon";
 import { IconType } from "react-icons";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -57,12 +59,19 @@ function CreatorCard({
 
   return (
     <div className="w-[23rem] h-[16rem] border-fuchsia-700 border-1 border m-6 ">
-      <div className="w-full h-3/6 border-x-sky-400 border-1 border">
-        <img src={url} />
+      <div className="w-full grid h-3/6 border-x-sky-400 border-1 border justify-center bg-blue-500">
+        <img className="w-[69%] " src={url} />
       </div>
-      <div className="flex justify-items-stretch px-6">
+      <div className="flex justify-items-stretch px-6 relative">
         <div className="text-stone-50 flex-1 font-bold text-lg">{name}</div>
-        <div className="text-stone-50 flex-1 text-right ">Icons</div>
+        <div className="text-stone-50 flex-1 absolute right-0 py-2 px-3 flex ">
+          <div className="mx-1">
+            <FaCircleInfo size={20} />
+          </div>
+          <div className="mx-1">
+            <BiSolidPencil size={20} />
+          </div>
+        </div>
       </div>
       <div className="text-stone-50 px-5 flex">
         {socials.map((data) => (
@@ -76,7 +85,7 @@ function CreatorCard({
           </Router>
         ))}
       </div>
-      <div className="text-stone-50">{truncate(description)}</div>
+      <div className="text-stone-50 px-2">{truncate(description)}</div>
     </div>
   );
 }

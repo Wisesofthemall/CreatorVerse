@@ -8,6 +8,9 @@ import { BsFillImageFill } from "react-icons/bs";
 import { toast } from "react-hot-toast";
 import { postCreator } from "../client";
 
+type Props = {
+  handleToggle: (value: string) => void;
+};
 type socialType = {
   youtube?: string;
   twitter?: string;
@@ -22,14 +25,13 @@ type infoType = {
   instagram?: string;
 };
 
-function AddCreator() {
+function AddCreator({ handleToggle }: Props) {
   const [name, setName] = useState<string>("");
   const [desc, setdDesc] = useState("");
   const [socials, setSocials] = useState({});
   const [image, setImage] = useState("");
 
   const HandleC = async () => {
-    //! Please Debug Later
     const info: infoType = { name, image, desc, ...socials };
     function verifySocial(obj: socialType): boolean {
       if (obj.instagram && obj.instagram.length > 0) {
@@ -71,6 +73,10 @@ function AddCreator() {
       info.twitter || "",
     );
     console.log(posted);
+    if (posted === "success") {
+      toast.success(posted);
+      handleToggle("Add");
+    }
   };
   return (
     <div className="text-stone-50 grid justify-center">
@@ -94,7 +100,7 @@ function AddCreator() {
         <Description Change={setdDesc} />
       </div>
       <SocialMedias setState={setSocials} state={socials} />
-      <div className="flex justify-between">
+      <div className="flex justify-between my-8">
         <div onClick={() => HandleC()} className="">
           <CustomButton title="Submit" />
         </div>
