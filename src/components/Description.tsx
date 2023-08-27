@@ -1,9 +1,10 @@
 import { MdDescription } from "react-icons/md";
 type Props = {
   Change: (value: string) => void;
+  value?: string;
 };
 
-function Description({ Change }: Props) {
+function Description({ Change, value }: Props) {
   return (
     <div className="grid ">
       <div className="flex">
@@ -12,6 +13,7 @@ function Description({ Change }: Props) {
       </div>
       <p className="text-sm mb-1">Describe your creator</p>
       <textarea
+        value={value ? value : undefined}
         onChange={(e) => Change(e.target.value)}
         className={`w-full  h-36
          rounded-md text-black `}

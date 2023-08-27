@@ -6,9 +6,10 @@ type Props = {
   subtitle: string;
   icon: IconType;
   PlusSize?: boolean;
+  value?: string;
 };
 
-function Input({ name, Change, subtitle, icon: Icon, PlusSize }: Props) {
+function Input({ name, Change, subtitle, icon: Icon, PlusSize, value }: Props) {
   return (
     <div className="grid ">
       <div className="flex">
@@ -17,6 +18,7 @@ function Input({ name, Change, subtitle, icon: Icon, PlusSize }: Props) {
       </div>
       <p className="text-sm mb-1">{subtitle}</p>
       <input
+        value={value ? value : undefined}
         onChange={(e) => Change(e.target.value)}
         className={`w-full ${
           PlusSize ? "h-36" : "h-full"

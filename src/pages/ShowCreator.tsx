@@ -26,6 +26,11 @@ type socialType = {
 export default function ShowCreator() {
   const [user, setUser] = useState<creatorType | null>(null);
   const location = useLocation();
+  //const navigate = useNavigate();
+
+  const handleEdit = () => {
+    window.location.href = "/EditCreator/?id=9";
+  };
 
   console.log(location.search); // "?query=foo"
 
@@ -49,6 +54,7 @@ export default function ShowCreator() {
   if (user?.youtube && (user?.youtube?.length > 0 || user?.youtube !== null)) {
     socials.push({ icon: ImYoutube, handle: "youtube", name: user.youtube });
   }
+
   console.log(socials);
   useEffect(() => {
     async function fetchData() {
@@ -67,19 +73,19 @@ export default function ShowCreator() {
 
   return (
     <div className="text-stone-50 h-[50rem] w-full border border-1 border-black px-10 pt-5">
-      <div className=" h-3/4 border border-1 border-purple-600 md:flex">
-        <div className="border border-1 border-orange-600 flex-1 ">
-          <img className="w-full h-full" src={user?.url} />
+      <div className=" h-3/4  md:flex">
+        <div className=" flex-1 ">
+          <img className="w-full h-full rounded-lg" src={user?.url} />
         </div>
-        <div className="border border-1 border-x-amber-950 flex-1 p-6">
-          <div className="font-bold text-4xl text-blue-700 ">{user?.name}</div>
-          <div className="font-bold text-md my-5 text-blue-700 ">
+        <div className=" flex-1 p-6">
+          <div className="font-bold text-4xl text-blue-400 ">{user?.name}</div>
+          <div className="font-bold text-md my-5 text-blue-400">
             {user?.description}
           </div>
           <div className="">
             {socials.map(({ handle, name, icon: Icon }) => {
               return (
-                <div key={handle} className="flex text-blue-700 m-5">
+                <div key={handle} className="flex text-blue-400 m-5">
                   <Icon size={40} />
                   <div className="text-4xl font-bold ml-4">@{name}</div>
                 </div>
@@ -88,9 +94,11 @@ export default function ShowCreator() {
           </div>
         </div>
       </div>
-      <div className="border border-1 text-green-500 flex">
+      <div className="my-8 text-green-500 flex justify-around ">
         {" "}
-        <CustomButton title="EDIT" />
+        <div onClick={() => handleEdit()} className="cursor-pointer ">
+          <CustomButton title="EDIT" />
+        </div>
         <CustomButton title="DELETE" />
       </div>
     </div>

@@ -12,8 +12,9 @@ type SocialProp = {
 type Prop = {
   setState: (value: SocialProp) => void;
   state: SocialProp;
+  value?: SocialProp;
 };
-function SocialMedias({ setState, state }: Prop) {
+function SocialMedias({ setState, state, value }: Prop) {
   return (
     <div>
       <div className="w-60 m-7">
@@ -22,6 +23,7 @@ function SocialMedias({ setState, state }: Prop) {
           Change={(value) => setState({ ...state, youtube: value })}
           subtitle="The handle without the @"
           icon={BiLogoYoutube}
+          value={value ? value.youtube : undefined}
         />{" "}
       </div>
       <div className="w-60 m-7">
@@ -30,6 +32,7 @@ function SocialMedias({ setState, state }: Prop) {
           Change={(value) => setState({ ...state, twitter: value })}
           subtitle="The handle without the @"
           icon={BsTwitter}
+          value={value ? value.twitter : undefined}
         />
       </div>
       <div className="w-60 m-7">
@@ -38,6 +41,7 @@ function SocialMedias({ setState, state }: Prop) {
           Change={(value) => setState({ ...state, instagram: value })}
           subtitle="The handle without the @"
           icon={BsInstagram}
+          value={value ? value.instagram : undefined}
         />
       </div>
     </div>
