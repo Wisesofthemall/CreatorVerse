@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
-const supabaseUrl = "https://gmpupjnxopeafyhnqscw.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtcHVwam54b3BlYWZ5aG5xc2N3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MzAxNzYxOCwiZXhwIjoyMDA4NTkzNjE4fQ.MwrWEKenDDq2IJPEw2AnuQ6a4slR9HE2MsEPzB0jmrQ";
+const supabaseUrl = "place your url here"
+const supabaseKey = "place your key here"
+  
 console.log(supabaseUrl, supabaseKey);
 const supabase = createClient(supabaseUrl, supabaseKey);
 
